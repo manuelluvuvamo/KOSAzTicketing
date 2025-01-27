@@ -1,8 +1,8 @@
 <?php
 
-namespace AntonioPedro99\Azticketing\Services;
+namespace Kinsari\Azticketing\Services;
 
-use AntonioPedro99\Azticketing\Services\AzTicketingAzureDevOpsService;
+use Kinsari\Azticketing\Services\AzTicketingAzureDevOpsService;
 
 class AzTicketingManagerService
 {
@@ -23,19 +23,18 @@ class AzTicketingManagerService
         return $this->azureDevOpsService->getTicket($id);
     }
 
-    public function getTickets($metadata=[])
+    public function getTickets($metadata = [])
     {
         return $this->azureDevOpsService->getTickets($metadata);
     }
 
-    public function addComment($id, $comment, $metadata=[])
+    public function addComment($id, $comment, $metadata = [])
     {
         return $this->azureDevOpsService->addComment($id, $comment, $metadata);
     }
 
-    public function closeTicket($id, $metadata=[])
+    public function closeTicket($id, $metadata = [])
     {
         return $this->azureDevOpsService->closeTicket($id, $metadata);
     }
-
 }

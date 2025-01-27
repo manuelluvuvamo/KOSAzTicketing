@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioPedro99\Azticketing\Responses;
+namespace Kinsari\Azticketing\Responses;
 
 class WorkItem
 {
@@ -17,7 +17,7 @@ class WorkItem
     {
         $this->id = $data['id'];
         $this->title = $data['fields']['System.Title'];
-        $this->description = $data['fields']['System.Description'];
+        $this->description = $data['fields']['System.Description'] ?? null;
         $this->metadata = $data['fields'];
         $this->status = $data['fields']['System.State'];
         $this->createdAt = $data['fields']['System.CreatedDate'];
@@ -39,7 +39,7 @@ class WorkItem
         ];
     }
 
-    public static function fromArray(array $data):self
+    public static function fromArray(array $data): self
     {
         return new self($data);
     }

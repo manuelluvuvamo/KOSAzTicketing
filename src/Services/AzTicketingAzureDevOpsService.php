@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioPedro99\Azticketing\Services;
+namespace Kinsari\Azticketing\Services;
 
 use GuzzleHttp\Client;
 
@@ -12,7 +12,7 @@ class AzTicketingAzureDevOpsService
     protected $pat;
     protected $webhookSecret;
     protected $areaPath;
-    private $baseUrl= 'https://dev.azure.com/';
+    private $baseUrl = 'https://dev.azure.com/';
     private $apiVersion = '7.1-preview.3';
 
     public function __construct()
@@ -41,7 +41,7 @@ class AzTicketingAzureDevOpsService
      * @param array $metadata
      * @return array|string
      */
-    public function createTicket($title, $description, $metadata=[])
+    public function createTicket($title, $description, $metadata = [])
     {
         $url = "{$this->baseUrl}{$this->organization}/{$this->project}/_apis/wit/workitems/\$issue?api-version={$this->apiVersion}";
 
@@ -110,7 +110,7 @@ class AzTicketingAzureDevOpsService
      * @param $metadata array of metadata to filter the tickets
      * @return array|string
      */
-    public function getTickets($metadata=[])
+    public function getTickets($metadata = [])
     {
         $url = "{$this->baseUrl}{$this->organization}/{$this->project}/_apis/wit/wiql?api-version=7.1-preview.2";
 
@@ -118,7 +118,7 @@ class AzTicketingAzureDevOpsService
         $columns = ["[System.Id], [System.Title], [System.State]"];
 
         // template query
-        $query = "SELECT ". implode(", ", $columns). " FROM WorkItems";
+        $query = "SELECT " . implode(", ", $columns) . " FROM WorkItems";
 
         if ($metadata) {
             $query .= " WHERE ";
@@ -154,7 +154,7 @@ class AzTicketingAzureDevOpsService
      * @param array $data
      * @return array|string
      */
-    public function addComment($id, $comment, $metadata=[])
+    public function addComment($id, $comment, $metadata = [])
     {
         $url = "{$this->baseUrl}{$this->organization}/{$this->project}/_apis/wit/workitems/{$id}/comments?api-version={$this->apiVersion}";
 
@@ -187,7 +187,7 @@ class AzTicketingAzureDevOpsService
      * @param array $metadata array of metadata to close the ticket
      * @return array|string
      */
-    public function closeTicket($id, $metadata=[])
+    public function closeTicket($id, $metadata = [])
     {
         $url = "{$this->baseUrl}{$this->organization}/{$this->project}/_apis/wit/workitems/{$id}?api-version={$this->apiVersion}";
 

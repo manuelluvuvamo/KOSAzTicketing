@@ -24,5 +24,5 @@ return array(
     'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
-    'AntonioPedro99\\Azticketing\\' => array($baseDir . '/src'),
+    'Kinsari\\Azticketing\\' => array($baseDir . '/src'),
 );
