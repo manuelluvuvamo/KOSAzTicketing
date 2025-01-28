@@ -20,7 +20,7 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^7.9",
-        "illuminate/support": "^10.48"
+        "illuminate/support": "^8.12"
     },
     "extra": {
         "laravel": {

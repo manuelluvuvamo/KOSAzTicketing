@@ -77,7 +77,7 @@
                     <div class="invalid-feedback">Indique um título.</div>
                 </div>
 
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3" hidden>
                     <textarea class="form-control" id="exception" name="exceptionMessage" placeholder=" " style="height: 120px" readonly>{{ $exceptionMessage }}</textarea>
                     <label for="exception">Mensagem de exceção</label>
                 </div>
