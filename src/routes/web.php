@@ -28,14 +28,18 @@ Route::group(['middleware' => ['web'], 'prefix' => 'azticketing'], function () {
     Route::post('/workitem/create', function (Request $request) {
 
         $title = $request->input('title');
-        $description = $request->input('description');
 
-        $az = AzTicketingManager::createTicket($title, $description, []);
+        $observations = $request->input('observations') ?? "";
+        $exceptionMessage = $request->input('exceptionMessage') ?? "";
+
+        $description = $request->input('description') ?? $observations. "\n\n" . $exceptionMessage;
+
+        $az = AzTicketingManager::createTicket($title, $description, ["System.Tags" => env('APP_NAME')]);
 
         if ($az) {
-            return view('azticketing::index', ['ticket' => $az])->with('success', 'Ticket created');
+            return redirect()->back()->with('success', 'Ticket created');
         } else {
-            return view('azticketing::index', ['error' => 'Error creating ticket'])->with('error', 'Error creating ticket');
+            return redirect()->back()->with('error', 'Error creating ticket');
         }
     })->name('azticketing.create');
 
@@ -84,7 +88,8 @@ Route::group(['middleware' => ['web'], 'prefix' => 'azticketing'], function () {
     Route::get('/report', function () {
 
         $exceptionMessage = Session::get('exceptionMessage') ?? null;
+        $exceptionTitle = Session::get('exceptionTitle') ?? null;
 
-        return view('azticketing::report', compact('exceptionMessage'));
+        return view('azticketing::report', compact('exceptionMessage', 'exceptionTitle'));
     });
 });
