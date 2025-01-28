@@ -1,6 +1,6 @@
 <?php
 
-namespace AntonioPedro99\Azticketing\Facades;
+namespace Kinsari\Azticketing\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

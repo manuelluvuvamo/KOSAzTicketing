@@ -1,13 +1,14 @@
 <?php
 
-namespace AntonioPedro99\Azticketing;
+namespace Kinsari\Azticketing;
 
-use AntonioPedro99\Azticketing\Responses\WorkItem;
+use Kinsari\Azticketing\Responses\WorkItem;
 use Illuminate\Support\Facades\Route;
 use AzTicketingManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
-Route::group(['middleware' => ['web'], 'prefix'=>'azticketing'], function () {
+Route::group(['middleware' => ['web'], 'prefix' => 'azticketing'], function () {
 
     Route::get('/', function () {
 
@@ -21,20 +22,24 @@ Route::group(['middleware' => ['web'], 'prefix'=>'azticketing'], function () {
             $workItemsWithDetails[] = WorkItem::fromArray($workItemDetails);
         }
 
-        return view('azticketing::index' , ['tickets' => $workItemsWithDetails]);
+        return view('azticketing::index', ['tickets' => $workItemsWithDetails]);
     });
 
     Route::post('/workitem/create', function (Request $request) {
 
         $title = $request->input('title');
-        $description = $request->input('description');
 
-        $az = AzTicketingManager::createTicket($title, $description, []);
+        $observations = $request->input('observations') ?? "";
+        $exceptionMessage = $request->input('exceptionMessage') ?? "";
+
+        $description = $request->input('description') ?? $observations. "\n\n" . $exceptionMessage;
+
+        $az = AzTicketingManager::createTicket($title, $description, ["System.Tags" => env('APP_NAME')]);
 
         if ($az) {
-            return view('azticketing::index' , ['ticket' => $az])->with('success', 'Ticket created');
+            return redirect()->back()->with('success', 'Ticket created');
         } else {
-            return view('azticketing::index' , ['error' => 'Error creating ticket'])->with('error', 'Error creating ticket');
+            return redirect()->back()->with('error', 'Error creating ticket');
         }
     })->name('azticketing.create');
 
@@ -45,9 +50,9 @@ Route::group(['middleware' => ['web'], 'prefix'=>'azticketing'], function () {
         if ($ticket) {
             $workItem = WorkItem::fromArray($ticket);
 
-            return view('azticketing::index' , ['ticket' => $workItem])->with('success', 'Ticket created');
+            return view('azticketing::index', ['ticket' => $workItem])->with('success', 'Ticket created');
         } else {
-            return view('azticketing::index' , ['error' => 'Error getting ticket'])->with('error', 'Error getting ticket');
+            return view('azticketing::index', ['error' => 'Error getting ticket'])->with('error', 'Error getting ticket');
         }
     });
 
@@ -60,9 +65,9 @@ Route::group(['middleware' => ['web'], 'prefix'=>'azticketing'], function () {
         if ($ticket) {
             $workItem = WorkItem::fromArray($ticket);
 
-            return view('azticketing::index' , ['ticket' => $workItem])->with('success', 'Comment added');
+            return view('azticketing::index', ['ticket' => $workItem])->with('success', 'Comment added');
         } else {
-            return view('azticketing::index' , ['error' => 'Error adding comment'])->with('error', 'Error adding comment');
+            return view('azticketing::index', ['error' => 'Error adding comment'])->with('error', 'Error adding comment');
         }
     });
 
@@ -70,14 +75,21 @@ Route::group(['middleware' => ['web'], 'prefix'=>'azticketing'], function () {
 
         $az = AzTicketingManager::closeTicket($id);
 
-        return view('azticketing::index' , ['ticket' => $az]);
+        return view('azticketing::index', ['ticket' => $az]);
     });
 
     Route::get('/workitem/{id}/close', function ($id) {
 
         $az = AzTicketingManager::closeTicket($id);
 
-        return view('azticketing::index' , ['ticket' => $az]);
+        return view('azticketing::index', ['ticket' => $az]);
     });
 
+    Route::get('/report', function () {
+
+        $exceptionMessage = Session::get('exceptionMessage') ?? null;
+        $exceptionTitle = Session::get('exceptionTitle') ?? null;
+
+        return view('azticketing::report', compact('exceptionMessage', 'exceptionTitle'));
+    });
 });

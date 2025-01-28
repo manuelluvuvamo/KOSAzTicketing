@@ -1,17 +1,19 @@
 <?php
-namespace AntonioPedro99\Azticketing\Providers;
+
+namespace Kinsari\Azticketing\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use AntonioPedro99\Azticketing\Services\AzTicketingAzureDevOpsService;
-use AntonioPedro99\Azticketing\Services\AzTicketingManagerService;
+use Kinsari\Azticketing\Services\AzTicketingAzureDevOpsService;
+use Kinsari\Azticketing\Services\AzTicketingManagerService;
 
-class AzTicketingServiceProvider extends ServiceProvider {
+class AzTicketingServiceProvider extends ServiceProvider
+{
 
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
-        if(config('azticketing.enable_views')){
+        if (config('azticketing.enable_views')) {
             $this->loadViewsFrom(__DIR__ . '/../resources/views', 'azticketing');
         }
 
@@ -22,7 +24,7 @@ class AzTicketingServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/azticketing.php', 'azticketing');
+        $this->mergeConfigFrom(__DIR__ . '/../config/azticketing.php', 'azticketing');
 
         $this->app->singleton(AzTicketingAzureDevOpsService::class, function () {
             return new AzTicketingAzureDevOpsService();

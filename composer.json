@@ -1,10 +1,10 @@
 {
-    "name": "antonio-pedro99/azticketing",
+    "name": "kinsari/azticketing",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "AntonioPedro99\\Azticketing\\": "src/"
+            "Kinsari\\Azticketing\\": "src/"
         }
     },
     "description": "A robust ticketing system for your Laravel application using Azure Board",
@@ -12,6 +12,10 @@
         {
             "name": "António Pedro",
             "email": "42675180+antonio-pedro99@users.noreply.github.com"
+        },
+        {
+            "name": "Manuel Luvuvamo",
+            "email": "65790902+manuelluvuvamo@users.noreply.github.com"
         }
     ],
     "require": {
@@ -21,10 +25,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AntonioPedro99\\Azticketing\\Providers\\AzTicketingServiceProvider"
+                "Kinsari\\Azticketing\\Providers\\AzTicketingServiceProvider"
             ],
             "aliases": {
-                "AzTicketingManager": "AntonioPedro99\\Azticketing\\Facades\\AzTicketingManagerFacade"
+                "AzTicketingManager": "Kinsari\\Azticketing\\Facades\\AzTicketingManagerFacade"
             }
         }
     }

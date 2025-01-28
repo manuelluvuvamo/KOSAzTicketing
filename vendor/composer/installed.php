@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'antonio-pedro99/azticketing',
+        'name' => 'kinsari/azticketing',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => null,
@@ -10,7 +10,7 @@
         'dev' => true,
     ),
     'versions' => array(
-        'antonio-pedro99/azticketing' => array(
+        'kinsari/azticketing' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'reference' => null,
