@@ -88,7 +88,9 @@ Route::group(['middleware' => ['web'], 'prefix' => 'azticketing'], function () {
     Route::get('/report', function () {
 
         $exceptionMessage = Session::get('exceptionMessage') ?? null;
-        $exceptionTitle = Session::get('exceptionTitle') ?? null;
+
+        $timestamp = now()->format('Y-m-d H:i:s');
+        $exceptionTitle = "Erro Reportado ER $timestamp";
 
         return view('azticketing::report', compact('exceptionMessage', 'exceptionTitle'));
     });

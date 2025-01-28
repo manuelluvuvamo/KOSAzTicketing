@@ -72,7 +72,7 @@
             <form id="bugReportForm" action="{{ route('azticketing.create') }}" class="needs-validation" novalidate method="POST">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="title" name="title" placeholder=" " value="{{ $exceptionTitle }}" required>
+                    <input type="text" class="form-control" id="title" name="title" placeholder=" " value="{{ $exceptionTitle }}" required readonly>
                     <label for="title">Titulo</label>
                     <div class="invalid-feedback">Indique um título.</div>
                 </div>
@@ -89,12 +89,15 @@
 
                 <button type="submit" class="btn btn-dark w-100 py-3">Enviar</button>
             </form>
+
+            <div class="text-center mt-4">
+                <a href="{{ url('/') }}" class="btn btn-secondary w-100 py-3">Voltar à Página Inicial</a>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 
 </html>
