@@ -1,5 +1,5 @@
 {
-    "name": "kinsari/azticketing",
+    "name": "kinsari-os/azticketing",
     "type": "library",
     "license": "MIT",
     "autoload": {
