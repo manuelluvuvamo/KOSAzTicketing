@@ -33,6 +33,18 @@ composer update
 php artisan vendor:publish --tag="azticketing-config"
 ```
 
+3. Publish the views:
+
+```bash
+php artisan vendor:publish --tag="azticketing-views"
+
+```
+3. Publish the assets:
+
+```bash
+php artisan vendor:publish --tag="azticketing-assets"
+
+```
 ## Configuration
 
 You can configure the package by editing the `config/azticketing.php` file. It contains the following options:
