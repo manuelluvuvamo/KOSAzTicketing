@@ -2,6 +2,7 @@
 
 namespace Kinsari\Azticketing\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Kinsari\Azticketing\Http\Middleware\HandleServerError;
 use Kinsari\Azticketing\Services\AzTicketingAzureDevOpsService;
