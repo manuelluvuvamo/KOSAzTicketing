@@ -30,9 +30,9 @@ class AzTicketingServiceProvider extends ServiceProvider
             __DIR__.'/../resources/assets' => public_path('vendor/azticketing'),
         ], 'azticketing-assets');
 
-        $router = $this->app->make(Router::class);
-
-        $router->pushMiddlewareToGroup('web', HandleServerError::class);
+        $this->app['router']->middlewareGroup('azticketing-handle-server-error', [
+            HandleServerError::class,
+        ]);
     }
 
     public function register()
