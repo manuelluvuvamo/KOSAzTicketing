@@ -37,6 +37,10 @@ Route::group(['middleware' => ['web'], 'prefix' => 'azticketing'], function () {
         $az = AzTicketingManager::createTicket($title, $description, ["System.Tags" => env('APP_NAME')]);
 
         if ($az) {
+
+            if (Session::has('exceptionMessage')) {
+                Session::forget('exceptionMessage');
+            }
             return redirect()->back()->with('success', 'Ticket created');
         } else {
             return redirect()->back()->with('error', 'Error creating ticket');
